@@ -1,16 +1,21 @@
 package com.example.ClimaAPI.controller;
 
-import com.example.ClimaAPI.service.Service;
+import com.example.ClimaAPI.service.WeatherService;
+import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Controller {
 
-Service service = new Service();
+    private final WeatherService weatherService;
+
+    public Controller(WeatherService weatherService) {
+        this.weatherService = weatherService;
+    }
 
     @GetMapping("/clima")
-    public String getClima() {
-        return service.pegarTempoBH();
+    public Map<String, Object> getClima() {
+        return weatherService.obterClimaBH();
     }
 }
